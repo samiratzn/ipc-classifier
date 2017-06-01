@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE record SYSTEM "../../../../ipctraining.dtd">
+<record cy="WO" an="US0024942" pn="WO012006320010322" dnum="0120063" kind="A1">
+<prs>
+<pr prn="US19990914 60/153,825"/>
+</prs>
+<ipcs ed="7" mc="D01D00106">
+<ipc ic="D01F00110"></ipc>
+<ipc ic="D01F00604"></ipc>
+<ipc ic="D01F00606"></ipc>
+</ipcs>
+<ins>
+<in>COOK, Michael, Charles</in>
+<in>MCDOWALL, Debra, Jean</in>
+<in>STANO, Dana, Elizabeth</in>
+<in>POWERS, Michael, David</in>
+<in>MARMON, Samuel, Edward</in>
+</ins>
+<pas>
+<pa>KIMBERLY-CLARK WORLDWIDE, INC.</pa>
+</pas>
+<tis>
+<ti xml:lang="EN">METHOD OF FORMING A TREATED FIBER AND A TREATED FIBER FORMED THEREFROM
+</ti>
+</tis>
+<abs>
+<ab xml:lang="EN">The present disclosure is directed to a method of forming a treated fiber. A molten polymer is delivered to a fiber spinning assembly adapted to form and distribute polymer streams. At least one treatment is applied in a liquid state to at least one region on the surface of at least one molten polymer stream within the fiber spinning assembly. A substantial portion of the treatment remains on the surface of the resulting fiber within the treated region. One or more regions on the surface of the molten polymer may be treated with one or multiple treatments. The degree of coverage may vary from little coverage to complete coverage of the fiber surface. The treated regions may be in contact with one another or may be separate and distinct. A nonwoven web may be produced with selectively treated fiber regions by designing one or more fiber spinning assemblies to treat selected fibers or to apply multiple treatments. The regions of the nonwoven web may vary in treatment type, amount, or degree of coverage.</ab>
+</abs>
+<cls>
+<cl xml:lang="EN">We claim:
+1. A method of forming a treated fiber comprising:
+a) providing a molten polymer;
+b) delivering said molten polymer to a fiber spinning assembly adapted to
+form and distribute a stream of said molten polymer; andc) applying a treatment in a liquid state to at least one region on the surface
+of said molten polymer stream within said fiber spinning assembly,
+such that a substantial portion of said treatment remains on the surface of the resulting fiber within said treated region.2. The method of claim 1, wherein said treatment has a boiling point of at least about300 F(149 C.
+[  abridged  ]</cl>
+</cls>
+<txts>
+<txt xml:lang="EN"> METHOD OF FORMING A TREATED FIBER AND
+A TREATED FIBER FORMED THEREFROM
+Field of the Invention
+The present invention relates to a treated fiber and a method of forming a treated fiber. Such treated fibers find many applications, for example, in nonwoven fabrics, yarns, carpets, and otherwise where fibers having one or more modified properties are desired. Background of the Invention
+Nonwoven fabrics are finding increasing use in various applications, including personal care absorbent articles such as diapers, training pants, incontinence garments, mattress pads, wipers, and feminine care products (e. g., sanitary napkins), medical applications such as surgical drapes, gowns, wound care dressings, and facemasks, articles of clothing or portions thereof including industrial workwear and lab coats,household and industrial operations including liquid and air filtration, and the like. It is often desirable to modify the properties of the nonwoven fabric to perform a function or meet a requirement for a particular application.
+[  abridged  ]
+Having thus described the invention in detail, it should be apparent that various modifications can be made in the present invention without departing from the spirit and scope of the following claims.</txt>
+</txts>
+</record>
