@@ -25,3 +25,5 @@ These tasks were on the original specification of the problem and are sequential
 The structure of the project is borrowed from [The Hitchhiker's Guide to Python](http://python-guide-pt-br.readthedocs.io/en/latest/writing/structure/) based on [Kenneth Reitz's](https://github.com/kennethreitz/samplemod) recommendations.
 
 The team should encourage the guidelines of [this](https://gist.github.com/sloria/7001839) best practices guide.
+
+To ensure maximum organization and integration within the project we chose to follow the [Github flow](https://guides.github.com/introduction/flow/) workflow.
