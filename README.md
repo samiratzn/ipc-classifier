@@ -19,6 +19,8 @@ It is recommended that you use `virtualenv` to manage an isolated and standarize
 
 During development, if you need a package that isn't listed in `requirements.txt`, you should install it with `pip install <package>` and then run `pip freeze >> requirements.txt` so the other team members can install `<package>` easily when they fetch your changes from the repo.
 
+Tests should be run with `nosetests` from the terminal in the root directory.
+
 ## Guidelines
 The structure of the project is borrowed from [The Hitchhiker's Guide to Python](http://python-guide-pt-br.readthedocs.io/en/latest/writing/structure/) based on [Kenneth Reitz's](https://github.com/kennethreitz/samplemod) recommendations.
 

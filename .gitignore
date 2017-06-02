@@ -1,3 +1,5 @@
 ipc-classifier
 wipo-alpha
 *~
+__pycache__
+*.pyc
