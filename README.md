@@ -16,8 +16,14 @@ It is recommended that you use `virtualenv` to manage an isolated and standarize
 2. Then you should run `virtualenv <any name you want>` inside the project directory.
 3. Type `source <any name you want>/bin/activate`. Your terminal prompt should change.
 4. Now you can install required packages with `pip install -r requirements.txt`. Note that you no longer need `sudo` because the packages are installing in the project folder. Also note that if you name the virtual environment anything that's not "ipc-classifier", you should add that name to `.gitignore`, but "ipc-classifier" is encouraged.
+5. Run `python` and then
 
-During development, if you need a package that isn't listed in `requirements.txt`, you should install it with `pip install <package>` and then run `pip freeze >> requirements.txt` so the other team members can install `<package>` easily when they fetch your changes from the repo.
+    >>> import nltk
+	>>> nltk.download()
+	
+You will see a window pop up then go to the corpora tab and look for `stopwords`, download it.
+
+During development, if you need a package that isn't listed in `requirements.txt`, you should install it with `pip install <package>` and then run `pip freeze > requirements.txt` so the other team members can install `<package>` easily when they fetch your changes from the repo.
 
 Tests should be run with `nosetests` from the terminal in the root directory.
 

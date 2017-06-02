@@ -9,6 +9,8 @@ class TestPreprocessingTools(unittest.TestCase):
         self.classifier = factories.PatentModelFactory()
         with open("tests/data/patent.xml", 'r') as file_patent:
             self.text_patent = file_patent.read()
+        self.text_words = ("dog no cat yes may internet book page internet dog great")
+        self.list_words = set(["dog", "cat", "internet", "book", "page", "great", "yes", "may"])
 
     def test_fields_extraction(self):
         """Verify if the main code and the list of secondary codes are correct"""
@@ -17,6 +19,11 @@ class TestPreprocessingTools(unittest.TestCase):
         self.assertEqual(self.classifier.list_ipc, codes.list_ipc)
         self.assertEqual(self.classifier.number, codes.number)
         self.assertEqual(self.classifier.abstract, codes.abstract)
-        
+
+    def test_words_extraction(self):
+        """Verify if the extraction of words from the abstract works right"""
+        list_words = utils._extract_word_list(self.text_words)
+        self.assertEqual(self.list_words, list_words)
+
 if __name__ == '__main__':
     unittest.main()
