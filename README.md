@@ -18,8 +18,10 @@ It is recommended that you use `virtualenv` to manage an isolated and standarize
 4. Now you can install required packages with `pip install -r requirements.txt`. Note that you no longer need `sudo` because the packages are installing in the project folder. Also note that if you name the virtual environment anything that's not "ipc-classifier", you should add that name to `.gitignore`, but "ipc-classifier" is encouraged.
 5. Run `python` and then
 
-    >>> import nltk
-	>>> nltk.download()
+```python
+import nltk
+nltk.download()
+```
 	
 You will see a window pop up then go to the corpora tab and look for `stopwords`, download it.
 
