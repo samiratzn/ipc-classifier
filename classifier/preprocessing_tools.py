@@ -45,3 +45,13 @@ def get_term_document_matrix(vectorizer, iterable_documents):
     """
     matrix = vectorizer.fit_transform(iterable_documents)
     return matrix
+
+def normalize_matrix(transformer, matrix):
+    """Normalize count matrix to scale down the impact of very frequent tokens
+
+    :param transformer: A Sklearn TfidfTransformer object
+    :param matrix: An array representing a term document matrix,
+    output of CountVectorizer.fit_transform
+    """
+    matrix_normalized = transformer.fit_transform(matrix)
+    return matrix_normalized
