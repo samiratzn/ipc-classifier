@@ -35,3 +35,13 @@ def stem_words_list(list_words):
     stemmer_porter = porter.PorterStemmer()
     list_words_stemmed = [stemmer_porter.stem(word) for word in list_words]
     return list_words_stemmed
+
+def get_term_document_matrix(vectorizer, iterable_documents):
+    """Get a document-term matrix from an iterable that yields strings
+
+    :param vectorizer: An Sklearn CountVectorizer object with an attached vocabulary
+    :param iterable_documents: The iterable that yields strings
+    :rtype: An array of size [n_samples, n_features]
+    """
+    matrix = vectorizer.fit_transform(iterable_documents)
+    return matrix
