@@ -1,5 +1,5 @@
 """Provide utility functions for text preprocessing"""
-import classifier
+import models
 from bs4 import BeautifulSoup
 from nltk.corpus import stopwords
 from nltk.stem import porter
@@ -17,7 +17,9 @@ def _extract_fields(text_patent):
     list_ipc = _clean_ipc_list(tag_ipcs.contents)
     tag_abstract = soup.ab
     abstract = tag_abstract.text
-    return classifier.models.PatentDocument(number, ipcs, list_ipc, abstract)
+    tag_title = soup.ti
+    title = tag_title.text.rstrip()
+    return models.PatentDocument(number, title, ipcs, list_ipc, abstract)
 
 def _extract_word_list(text):
     list_words = text.split()
@@ -50,9 +52,8 @@ def transform_patent(patent):
     """
     patent.abstract = _extract_word_list(patent.abstract)
     patent.abstract = _stem_words_list(patent.abstract)
-    # TO-DO: Implement title retrieval
-    #    patent.title = _extract_word_list(patent.title)
-    #    patent.title = _stem_words_list(patent.title)
+    patent.title = _extract_word_list(patent.title)
+    patent.title = _stem_words_list(patent.title)
     return patent
 
 def get_term_document_matrix(vectorizer, iterable_documents):

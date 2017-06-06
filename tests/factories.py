@@ -6,6 +6,7 @@ class PatentModelFactory(factory.Factory):
     class Meta:
         model = models.PatentDocument
 
+    title = "METHOD OF FORMING A TREATED FIBER AND A TREATED FIBER FORMED THEREFROM"
     ipcs = 'D01D00106'
     list_ipc = ["D01F00110", "D01F00604", "D01F00606"]
     number = 'WO012006320010322'
