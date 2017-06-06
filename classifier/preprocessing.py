@@ -1,5 +1,6 @@
 """Text preprocessing module"""
 import os
+import preprocessing_tools as utils
 
 def create_index(path_data):
     """Use os.walk to create an index for a directory
@@ -28,3 +29,12 @@ def preprocess_training_data(path_training_data):
         with open(path_index, 'r') as file_index:
             text_index = file_index.read()
             print('Done.')
+
+    patents = []
+    for path_document in text_index.split('\n'):
+        with open(path_document, 'r') as file_document:
+            text_document = file_document.read()
+            patent = utils.get_patent(text_document)
+            patent_transformed = utils.transform_patent(patent)
+            patents.append(patent)
+            
