@@ -16,8 +16,8 @@ def _extract_fields(text_patent):
     tag_ipcs = soup.ipcs
     ipcs = tag_ipcs['mc']
     list_ipc = _clean_ipc_list(tag_ipcs.contents)
-    tag_abstract = soup.ab
-    abstract = tag_abstract.text.lower()
+    tag_abstract = soup.abs
+    abstract = tag_abstract.text.lower().strip()
     tag_title = soup.ti
     title = tag_title.text.rstrip().lower()
     return models.PatentDocument(number, title, ipcs, list_ipc, abstract)
@@ -69,14 +69,38 @@ def get_term_document_matrix(vectorizer, iterable_documents):
     :rtype: An array of size [n_samples, n_features]
     """
     matrix = vectorizer.fit_transform(iterable_documents)
+    print(matrix.shape)
     return matrix
 
-def normalize_matrix(transformer, matrix):
+def get_term_document_matrix_test(vectorizer, iterable_documents):
+    """Get a document-term matrix from an iterable that yields strings
+
+    :param vectorizer: An Sklearn CountVectorizer object with an attached vocabulary
+    :param iterable_documents: The iterable that yields strings
+    :rtype: An array of size [n_samples, n_features]
+    """
+    matrix = vectorizer.transform(iterable_documents)
+    print(matrix.shape)
+    return matrix
+
+def get_tfidf_matrix(transformer, matrix_tf):
     """Normalize count matrix to scale down the impact of very frequent tokens
 
     :param transformer: A Sklearn TfidfTransformer object
     :param matrix: An array representing a term document matrix,
     output of CountVectorizer.fit_transform
     """
-    matrix_normalized = transformer.fit_transform(matrix)
-    return matrix_normalized
+    matrix_tfidf = transformer.fit_transform(matrix_tf)
+    print(matrix_tfidf.shape)
+    return matrix_tfidf
+
+def get_tfidf_matrix_test(transformer, matrix_tf):
+    """Normalize count matrix to scale down the impact of very frequent tokens
+
+    :param transformer: A Sklearn TfidfTransformer object
+    :param matrix: An array representing a term document matrix,
+    output of CountVectorizer.fit_transform
+    """
+    matrix_tfidf = transformer.transform(matrix_tf)
+    print(matrix_tfidf.shape)
+    return matrix_tfidf

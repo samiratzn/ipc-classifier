@@ -12,14 +12,26 @@ def create_index(path_data):
             entries_index.append(os.path.join(root, item))
     return '\n'.join(entries_index[2:])
 
-def preprocess_training_data(path_data):
-    """Manipulate the data to have a proper representation for the model to consume
+def get_patents(text_index):
+    patents = []
+    print('Loading documents.')
+    for path_document in text_index.split('\n'):
+        with open(path_document, 'r', encoding='ISO-8859-1') as file_document:
+            #print('Loading {} to memory.'.format(path_document))
+            text_document = file_document.read()
+            patent = utils.get_patent(text_document)
+            patent_transformed = utils.transform_patent(patent)
+            patents.append(patent_transformed)
+    print('Done.')
+    return patents
 
-    :param path_training_data: A string, is the relative path to the training data root
-    directory. It should not have a trailing `/`.
-    """
-    path_index = path_data + '/index_training.txt'
-    path_training_data = path_data + '/train'
+def get_patent_text_iterator(patents):
+    iterator_patent_text = (' '.join(patent.title.union(patent.abstract)) for patent in patents)
+    return iterator_patent_text
+
+def source_index(path_data, path_sub):
+    path_index = path_data + '/index_' + path_sub[1:]
+    path_training_data = path_data + path_sub
     if not os.path.isfile(path_index):
         print('Creating index, please wait.')
         text_index = create_index(path_training_data)
@@ -31,22 +43,36 @@ def preprocess_training_data(path_data):
         with open(path_index, 'r') as file_index:
             text_index = file_index.read()
             print('Done.')
+    return text_index
 
-    patents = []
-    for path_document in text_index.split('\n'):
-        with open(path_document, 'r', encoding='ISO-8859-1') as file_document:
-            print('Loading {} to memory.'.format(path_document))
-            text_document = file_document.read()
-            patent = utils.get_patent(text_document)
-            patent_transformed = utils.transform_patent(patent)
-            patents.append(patent_transformed)
-    print('Done.')
+def get_features_count(vectorizer_count, patents):
+    iterator_patent_text = get_patent_text_iterator(patents)
+    vectors_features_count = utils.get_term_document_matrix(vectorizer_count,
+                                                            iterator_patent_text)
+    return vectors_features_count
 
-    count_vectorizer = sklearn.feature_extraction.text.CountVectorizer(input='content',
-                                                                       encoding='ISO-8859-1')
-    tfidftransformer = sklearn.feature_extraction.text.TfidfTransformer()
-    iterator_patent_text = (' '.join(patent.title.union(patent.abstract)) for patent in patents)
-    vectors_features_tf = utils.get_term_document_matrix(count_vectorizer,
-                                                         iterator_patent_text)
-    vectors_features_tfidf = utils.normalize_matrix(tfidftransformer, vectors_features_tf)
+def get_features_count_test(vectorizer_count, patents):
+    iterator_patent_text = get_patent_text_iterator(patents)
+    vectors_features_count = utils.get_term_document_matrix_test(vectorizer_count,
+                                                                 iterator_patent_text)
+    return vectors_features_count
+
+def get_tfidf_features(vectorizer_count, tfidftransformer, patents):
+    """Manipulate the data to have a proper representation for the model to consume
+
+    :param path_training_data: A string, is the relative path to the training data root
+    directory. It should not have a trailing `/`.
+    """
+    vectors_count = get_features_count(vectorizer_count, patents)
+    vectors_features_tfidf = utils.get_tfidf_matrix(tfidftransformer, vectors_count)
+    return vectors_features_tfidf
+
+def get_tfidf_features_test(vectorizer_count, tfidftransformer, patents):
+    """Manipulate the data to have a proper representation for the model to consume
+
+    :param path_training_data: A string, is the relative path to the training data root
+    directory. It should not have a trailing `/`.
+    """
+    vectors_count = get_features_count_test(vectorizer_count, patents)
+    vectors_features_tfidf = utils.get_tfidf_matrix(tfidftransformer, vectors_count)
     return vectors_features_tfidf
