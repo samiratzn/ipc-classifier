@@ -46,7 +46,7 @@ def preprocess_training_data(path_data):
                                                                        encoding='ISO-8859-1')
     tfidftransformer = sklearn.feature_extraction.text.TfidfTransformer()
     iterator_patent_text = (' '.join(patent.title.union(patent.abstract)) for patent in patents)
-    matrix_term_document = utils.get_term_document_matrix(count_vectorizer,
-                                                          iterator_patent_text)
-    matrix_normalized = utils.normalize_matrix(tfidftransformer, matrix_term_document)
-    print(matrix_normalized.shape)
+    vectors_features_tf = utils.get_term_document_matrix(count_vectorizer,
+                                                         iterator_patent_text)
+    vectors_features_tfidf = utils.normalize_matrix(tfidftransformer, vectors_features_tf)
+    return vectors_features_tfidf
