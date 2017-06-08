@@ -41,9 +41,9 @@ Also it might be worth reading [this guide](https://chris.beams.io/posts/git-com
 ## Tasks
 These tasks were on the original specification of the problem and are sequential, but are here in the form of a checklist for the team reference.
 
-- [ ] Parse the XML patent documents in order to extract the patent number, the IPC codes and the relevant parts of each patent (title and abstract).
-- [ ] Extract the individual words from the plain text of the documents in the training set, in order to build a vocabulary.
-- [ ] Remove noisy words from the vocabulary (stop-words, very rare words, etc.) and apply stemming/lemmatization.
+- [X] Parse the XML patent documents in order to extract the patent number, the IPC codes and the relevant parts of each patent (title and abstract).
+- [X] Extract the individual words from the plain text of the documents in the training set, in order to build a vocabulary.
+- [X] Remove noisy words from the vocabulary (stop-words, very rare words, etc.) and apply stemming/lemmatization.
 - [ ] Using the vocabulary, transform the complete dataset into a set of vectors using a tf-idf approach.
 - [ ] Assign to each vector its corresponding section and class using the IPC codes.
 - [ ] Train a classification system for the section level.
