@@ -1,6 +1,7 @@
 """Text preprocessing module"""
 import os
-import preprocessing_tools as utils
+import sklearn
+from classifier import preprocessing_tools as utils
 
 def create_index(path_data):
     """Use os.walk to create an index for a directory
@@ -34,9 +35,18 @@ def preprocess_training_data(path_data):
     patents = []
     for path_document in text_index.split('\n'):
         with open(path_document, 'r', encoding='ISO-8859-1') as file_document:
-            print('Processing {}'.format(path_document))
+            print('Loading {} to memory.'.format(path_document))
             text_document = file_document.read()
             patent = utils.get_patent(text_document)
             patent_transformed = utils.transform_patent(patent)
             patents.append(patent_transformed)
-            print('Done.')
+    print('Done.')
+
+    count_vectorizer = sklearn.feature_extraction.text.CountVectorizer(input='content',
+                                                                       encoding='ISO-8859-1')
+    tfidftransformer = sklearn.feature_extraction.text.TfidfTransformer()
+    iterator_patent_text = (' '.join(patent.title.union(patent.abstract)) for patent in patents)
+    matrix_term_document = utils.get_term_document_matrix(count_vectorizer,
+                                                          iterator_patent_text)
+    matrix_normalized = utils.normalize_matrix(tfidftransformer, matrix_term_document)
+    print(matrix_normalized.shape)

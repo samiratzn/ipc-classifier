@@ -1,8 +1,9 @@
 """Provide utility functions for text preprocessing"""
-import models
+import re
+from classifier import models
 from bs4 import BeautifulSoup
 from nltk.corpus import stopwords
-from nltk.stem import porter
+from nltk.stem import snowball
 
 def _clean_ipc_list(list_ipc):
     list_ipc_clean = [element['ic'] for element in list_ipc if not isinstance(element, str)]
@@ -16,17 +17,21 @@ def _extract_fields(text_patent):
     ipcs = tag_ipcs['mc']
     list_ipc = _clean_ipc_list(tag_ipcs.contents)
     tag_abstract = soup.ab
-    abstract = tag_abstract.text
+    abstract = tag_abstract.text.lower()
     tag_title = soup.ti
-    title = tag_title.text.rstrip()
+    title = tag_title.text.rstrip().lower()
     return models.PatentDocument(number, title, ipcs, list_ipc, abstract)
 
 def _extract_word_list(text):
-    list_words = text.split()
+    list_words = re.findall(r'[a-z]+', text, flags=re.IGNORECASE)
     english_stopwords = set(stopwords.words('english'))
     list_without_stopwords = [word for word in list_words if word not in english_stopwords]
     set_unique_words = set(list_without_stopwords)
     return set_unique_words
+
+def _stem(stemmer, word):
+    word_stemmed = stemmer.stem(word)
+    return word_stemmed
 
 def _stem_words_list(list_words):
     """Stem words using a nltk stemmer
@@ -34,8 +39,8 @@ def _stem_words_list(list_words):
     :param list_words: A list of strings representing words to stem
     :rtype: A list of strings representing stemmed words
     """
-    stemmer_porter = porter.PorterStemmer()
-    list_words_stemmed = [stemmer_porter.stem(word) for word in list_words]
+    stemmer = snowball.SnowballStemmer('english')
+    list_words_stemmed = {_stem(stemmer, word) for word in list_words}
     return list_words_stemmed
 
 def get_patent(text_patent):
